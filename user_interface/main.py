@@ -16,17 +16,19 @@ from InquirerPy import inquirer
 from InquirerPy.base.control import Choice
 from InquirerPy.separator import Separator
 
+args = ["----------Personal Financial Manager program----------"]
+
 def main(): #Main user interface
     while True:
-        print("----------Personal Financial Manager program----------")
+        print(args[0])
         try:
             intro = inquirer.text(message="Welcome ot your personal financial manager! What's your name?").execute()
+            print(f"Welcome {intro}.") #Repeats the username with a welcome message.
             pers_finan_opt = inquirer.select( #Main prompt
                 message="What would you like to do?:", #Questions
                 choices= ["Go to the Savings Goal Tracker", "Data Manager", "Convert Currency", "Check Budgetting", "Exit"],
                 filter=lambda result: result.split()[0].lower() #Allows the user to be able to input their response correctly.
             ).execute()
-            print(f"Welcome {intro}.") #Repeats the username with a welcome message.
             if pers_finan_opt == "go": #Different choices that go into the different functions.
                 print("This is the '1' option, 'Savings Goal Tracker', if it is working, then great! Don't forget to callback the actual functions here later!")
                 break
