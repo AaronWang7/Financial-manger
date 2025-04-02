@@ -1,4 +1,5 @@
 import base64
+from InquirerPy import inquirer
 
 #start of menu select function
 def menu_select(*args):
@@ -80,3 +81,48 @@ def caesar_cipher_decrypt(text, shift=3):
         else:
             decrypted_text += char
     return decrypted_text
+
+
+
+#START OF INQUIRE PY MENU SELECT FUNCTION
+
+def inqpy_menu(*args):
+    while True: #loop because having a recursive function wouldnt work
+
+
+
+        items = [] #creatres an empty list so it can be appended to later
+
+
+
+        for i in range(len(args)-1): #loops for each item in paramater aside from message
+
+
+                                                    #if the input was "example input" then it would print (1) example input
+            items.append(f"({i+1}) {args[i+1]}") #appends objects in the list to items in the format (1) example input
+
+
+
+        menu_input = inquirer.select( #creates the menu, the function behind it all
+            
+
+
+            message = args[0], #the message at the top of the question.
+
+
+
+            choices = items, #items is displayed in a menu navigatable by arrow keys and enter
+
+
+
+            filter = lambda result: result.split()[0].lower() #Allows the user to be able to input their response correctly.
+
+
+
+        ).execute() #runs everything inside of inquirer.select
+
+
+
+        return menu_input
+
+print(inqpy_menu("Please select your option:","option #1","option #2","option #3","option#4"))
