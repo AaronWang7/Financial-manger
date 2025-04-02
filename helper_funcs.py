@@ -1,3 +1,5 @@
+import base64
+
 #start of menu select function
 def menu_select(*args):
 
@@ -53,3 +55,27 @@ returns entered number while checking to make sure it fits the paramaters set
 If you want to be fancy with it, and have the user create their own menu, you can do print(menu_select(input("message: "),input("paramater 1: "),input("paramater 2: "),input("paramater 3: "),input("paramater 4: ")))
 """
 #end of menu select function
+
+
+
+def caesar_cipher_encrypt(text, shift=3):
+    """Encrypts text using Caesar Cipher."""
+    encrypted_text = ''
+    for char in text:
+        if char.isalpha():
+            shift_amount = 65 if char.isupper() else 97
+            encrypted_text += chr((ord(char) - shift_amount + shift) % 26 + shift_amount)
+        else:
+            encrypted_text += char
+    return encrypted_text
+
+def caesar_cipher_decrypt(text, shift=3):
+    """Decrypts text using Caesar Cipher."""
+    decrypted_text = ''
+    for char in text:
+        if char.isalpha():
+            shift_amount = 65 if char.isupper() else 97
+            decrypted_text += chr((ord(char) - shift_amount - shift) % 26 + shift_amount)
+        else:
+            decrypted_text += char
+    return decrypted_text
