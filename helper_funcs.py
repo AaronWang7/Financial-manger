@@ -6,7 +6,7 @@ def menu_select(*args):
 
     while True: #loop because having a recursive function wouldnt work
 
-        print(f"\n{args[0]}:") #prints the message
+        print(f"\n{args[0]}") #prints the message
 
         items = [] #creates empty list, allowing appending later
 
@@ -33,6 +33,7 @@ def menu_select(*args):
             print("\nPlease only enter a whole number")
 
 """"
+
 Example
 
 input:
@@ -59,7 +60,7 @@ If you want to be fancy with it, and have the user create their own menu, you ca
 
 
 def caesar_cipher_encrypt(text, shift=3):
-    """Encrypts text using Caesar Cipher."""
+    #Encrypts text using Caesar Cipher.
     encrypted_text = ''
     for char in text:
         if char.isalpha():
@@ -70,7 +71,7 @@ def caesar_cipher_encrypt(text, shift=3):
     return encrypted_text
 
 def caesar_cipher_decrypt(text, shift=3):
-    """Decrypts text using Caesar Cipher."""
+    #Decrypts text using Caesar Cipher.
     decrypted_text = ''
     for char in text:
         if char.isalpha():

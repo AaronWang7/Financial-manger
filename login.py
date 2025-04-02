@@ -5,12 +5,15 @@ import data_managment
 CSV_FILE = "loginfo.csv"
 
 def login_name():
-    """Prompts user for username and verifies it from the CSV file."""
-    name = input("Please enter your username: ").strip().lower()
+    #Prompts user for username and verifies it from the CSV file.
+    name = input("Please enter your username: ").strip().lower()  # 'name' is the user input
 
     # Now using data_managment to load user data
-    balances = data_managment.load_user_data(name)
-    if balances is not None:
+    # Check if the username exists
+    with open(CSV_FILE, "r") as file:
+        existing_users = {row[0] for row in csv.reader(file)}  # Set for faster lookup
+
+    if name in existing_users:  # Check if 'name' is in the existing users
         return name  # Return the username if found
     else:
         print("Error: Username not found.")
@@ -21,8 +24,9 @@ def login_name():
         elif selection == 2:
             return login_name()
 
+
 def login_password(username, stored_password):
-    """Verifies user password against stored encrypted password."""
+    #Verifies user password against stored encrypted password.
     password = input("Enter your password: ").strip()
     encrypted_password = helper_funcs.caesar_cipher_encrypt(password)
 
@@ -34,7 +38,7 @@ def login_password(username, stored_password):
         return login_name()
 
 def create_account():
-    """Handles new account creation."""
+    #Handles new account creation.
     username = input("Enter a new username: ").strip().lower()
 
     # Check if the username exists

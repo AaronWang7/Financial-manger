@@ -6,7 +6,7 @@ import helper_funcs
 CSV_FILE = "accounts.csv"
 
 def load_user_data(username):
-    """Loads user account data from the CSV file."""
+    #Loads user account data from the CSV file.
     try:
         with open(CSV_FILE, "r") as file:
             csv_reader = csv.reader(file)
@@ -24,7 +24,7 @@ def load_user_data(username):
     return None  # Return None if data is not found or error occurs
 
 def save_user_data(username, balances):
-    """Save a user's account data to CSV."""
+    #Save a user's account data to CSV.
     rows = []
     updated = False
     
@@ -55,15 +55,20 @@ def save_user_data(username, balances):
 # Function to create a new bank account for the user
 def create_account(username):
     balances = load_user_data(username)
+    if balances is None:  # If no data is found, initialize balances as an empty dictionary
+        balances = {}
+
     account_name = input("Enter new account name: ")
     amount = float(input("Enter initial amount: "))
     balances[account_name] = amount
     save_user_data(username, balances)
     print(f"Account '{account_name}' created successfully!")
 
-# Function to update an existing account
 def update_account(username):
     balances = load_user_data(username)
+    if balances is None:  # If no data is found, initialize balances as an empty dictionary
+        balances = {}
+
     print("Your accounts:")
     for account, amount in balances.items():
         print(f"{account}: ${amount}")
@@ -87,6 +92,7 @@ def update_account(username):
     save_user_data(username, balances)
     print("Account updated successfully!")
 
+
 # Function to display account balances as a pie chart
 def display_pie_chart(username):
     balances = load_user_data(username)
@@ -106,13 +112,13 @@ def display_pie_chart(username):
 def main_menu(username):
     while True:
         choice = helper_funcs.menu_select("Select an option: ","Create new account","Update existing account","Display account balances (Pie Chart)","Exit" )
-        if choice == "1":
+        if choice == 1:
             create_account(username)
-        elif choice == "2":
+        elif choice == 2:
             update_account(username)
-        elif choice == "3":
+        elif choice == 3:
             display_pie_chart(username)
-        elif choice == "4":
+        elif choice == 4:
             break  # Exit loop
         else:
             print("Invalid choice, try again!")
