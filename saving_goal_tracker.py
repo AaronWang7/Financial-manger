@@ -7,13 +7,14 @@ def welcome():
     #Display welcome
     print("Welcome to the Savings Goal Tracker!")
     #Check if path exists
-    if not os.path.exists("savings.csv"): 
-        # With open, mode = w 
+    if not os.path.exists("savings.csv"):
+        # With open, mode = w
         with open("savings.csv", "w", newline='') as file:
             writer = csv.writer(file)
             #Store in csv file, goal_amount, amount_saved,due date(To store them in order)
             writer.writerow(["goal_amount", "amount_saved", "due_date"])
     data_reader()
+
 
 def data_reader():
     try:
@@ -26,13 +27,17 @@ def data_reader():
             #If data is not empty
             if data:
                 print(f"Current goal: {data[0][0]}, Saved: {data[0][1]}, Due Date: {data[0][2]}")
+                user_progress()
             #Else calls goal_input
+            elif {data[0][0]}<= {data[0][1]}:
+                goal_input()
             else:
                 goal_input()
     #If file not found, display no savings data found
     except FileNotFoundError:
         print("No savings data found")
         goal_input()
+
 
 def goal_input():
     #lets user enter goal amount and due date
@@ -46,6 +51,7 @@ def goal_input():
     #Display goal saved
     print("Goal saved!")
     user_progress()
+
 
 def user_progress():
     #User enter the amount of money they saved
@@ -84,8 +90,15 @@ def check_due_date(due_date):
     #Check if passed due date
     if current_time > due_date:
         print("You reached your goal, but after the due date")
-    else:
+        goal_input()
+
+
+    elif current_time <= due_date:
         print("You reached your goal on time!")
+        goal_input()
 
 if __name__ == "__main__":
     welcome()
+
+
+
