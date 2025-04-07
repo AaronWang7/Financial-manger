@@ -30,16 +30,12 @@ def main(): #Main user interface
                 filter=lambda result: result.split()[0].lower() #Allows the user to be able to input their response correctly.
             ).execute()
             if pers_finan_opt == "go": #Different choices that go into the different functions, this one goes into the Savings/Goal Trackers.
-                
                 continue
             elif pers_finan_opt == "data": #This one goes into the Data Manager.
-                
                 continue
             elif pers_finan_opt == "convert": #This one goes into the Convert Currency.
-                
                 continue
             elif pers_finan_opt == "check": #This one goes into the Check Budgetting.
-                
                 continue
             elif pers_finan_opt == "exit": #As the name implies, exits and quits the program.
                 print("Goodbye, thank you for using your personal financial manager!")
