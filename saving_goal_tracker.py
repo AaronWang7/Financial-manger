@@ -13,7 +13,18 @@ def welcome():
             writer = csv.writer(file)
             #Store in csv file, goal_amount, amount_saved,due date(To store them in order)
             writer.writerow(["goal_amount", "amount_saved", "due_date"])
-    data_reader()
+            data_reader()
+    else:
+         with open("savings.csv", "r") as file:
+            reader = csv.reader(file)
+            #Skip
+            next(reader)  
+            data = list(reader)
+            if data:
+                data_reader()
+            else:
+                goal_input()
+            
 
 
 def data_reader():
@@ -36,21 +47,42 @@ def data_reader():
     #If file not found, display no savings data found
     except FileNotFoundError:
         print("No savings data found")
-        goal_input()
+
 
 
 def goal_input():
     #lets user enter goal amount and due date
-    goal_amount = input("Enter your goal amount: ")
-    due_date = input("Enter your due date (YYYY-MM-DD): ")
-    #With open, more = w
-    with open("savings.csv", "w", newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(["goal_amount", "amount_saved", "due_date"])
-        writer.writerow([goal_amount, 0, due_date])
-    #Display goal saved
-    print("Goal saved!")
-    user_progress()
+    try:
+        goal_amount = input("Enter your goal amount: ")
+        due_date = input("Enter your due date (YYYY-MM-DD): ")
+        #With open, more = w
+        with open("savings.csv", "w", newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["goal_amount", "amount_saved", "due_date"])
+            writer.writerow([goal_amount, 0, due_date])
+             #Display goal saved
+            print("Goal saved!")
+    except ValueError:
+        print("Enter numbers!")
+
+
+
+def new_input():
+    try:
+        goal_amount = input("Enter your goal amount: ")
+        due_date = input("Enter your due date (YYYY-MM-DD): ")
+        #With open, more = w
+        with open("savings.csv", "w", newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["goal_amount", "amount_saved", "due_date"])
+            writer.writerow([goal_amount, 0, due_date])
+             #Display goal saved
+            print("Goal saved!")
+            data_reader()
+    except ValueError:
+        print("Enter numbers!")
+
+
 
 
 def user_progress():
@@ -90,15 +122,14 @@ def check_due_date(due_date):
     #Check if passed due date
     if current_time > due_date:
         print("You reached your goal, but after the due date")
-        goal_input()
+        new_input()
 
 
     elif current_time <= due_date:
         print("You reached your goal on time!")
-        goal_input()
+        new_input()
 
 if __name__ == "__main__":
     welcome()
-
 
 
