@@ -9,7 +9,7 @@ def welcome():
     #Check if path exists
     if not os.path.exists("savings.csv"):
         # With open, mode = w
-        with open("savings.csv", "w", newline='') as file:
+        with open("savings.csv", "a", newline='') as file:
             writer = csv.writer(file)
             #Store in csv file, goal_amount, amount_saved,due date(To store them in order)
             writer.writerow(["goal_amount", "amount_saved", "due_date"])
@@ -79,9 +79,8 @@ def new_input():
              #Display goal saved
             print("Goal saved!")
             data_reader()
-    except ValueError:
-        print("Enter numbers!")
-
+    except Exception as e:
+            print("Try again!")
 
 
 
@@ -131,5 +130,4 @@ def check_due_date(due_date):
 
 if __name__ == "__main__":
     welcome()
-
 
