@@ -4,26 +4,21 @@ import time
 import os
 # welcome screen
 def welcome():
-    #Display welcome
     print("Welcome to the Savings Goal Tracker!")
-    #Check if path exists
     if not os.path.exists("savings.csv"):
-        # With open, mode = w
-        with open("savings.csv", "a", newline='') as file:
+        with open("savings.csv", "w", newline='') as file:
             writer = csv.writer(file)
-            #Store in csv file, goal_amount, amount_saved,due date(To store them in order)
             writer.writerow(["goal_amount", "amount_saved", "due_date"])
-            data_reader()
+            goal_input()
     else:
-         with open("savings.csv", "r") as file:
+        with open("savings.csv", "r") as file:
             reader = csv.reader(file)
-            #Skip
-            next(reader)  
             data = list(reader)
-            if data:
+            if len(data) > 1:
                 data_reader()
             else:
                 goal_input()
+
             
 
 
